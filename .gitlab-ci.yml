@@ -7,3 +7,12 @@ production:
   - dpl --provider=heroku --app=gustoland-api --api-key=$HEROKU_PRODUCTION_API_KEY
   only:
   - master
+staging:
+  type: deploy
+  script:
+  - apt-get update -qy
+  - apt-get install -y ruby-dev
+  - gem install dpl
+  - dpl --provider=heroku --app=gustoland-api-staging --api-key=$HEROKU_PRODUCTION_API_KEY
+  only:
+  - develop
