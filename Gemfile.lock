@@ -38,8 +38,6 @@ GEM
       i18n (~> 0.7)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
-    apipie-rails (0.3.7)
-      json
     arel (7.1.4)
     bcrypt (3.1.11)
     builder (3.2.3)
@@ -50,7 +48,6 @@ GEM
     globalid (0.3.7)
       activesupport (>= 4.1.0)
     i18n (0.7.0)
-    json (2.0.3)
     jwt (1.5.6)
     knock (2.1)
       bcrypt (~> 3.1)
@@ -128,7 +125,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  apipie-rails
   byebug
   knock
   listen (~> 3.0.5)
