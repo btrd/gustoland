@@ -1,51 +1,57 @@
-class RecipesController < ApplicationController
-  before_action :authenticate_user, only: [:create, :update, :destroy]
+module Api
+  module V1
+    class RecipesController < ApplicationController
+      before_action :authenticate_user, only: [:create, :update, :destroy]
 
-  before_action :set_recipe, only: [:show, :update, :destroy]
+      before_action :set_recipe, only: [:show, :update, :destroy]
 
-  # GET /recipes
-  def index
-    @recipes = Recipe.all
+      # GET /recipes
+      def index
+        @recipes = Recipe.all
 
-    render json: @recipes
-  end
+        render json: @recipes
+      end
 
-  # GET /recipes/1
-  def show
-    render json: @recipe
-  end
+      api :GET, '/recipes/:id'
+      param :id, :number
+      # GET /recipes/1
+      def show
+        render json: @recipe
+      end
 
-  # POST /recipes
-  def create
-    @recipe = Recipe.new(recipe_params)
+      # POST /recipes
+      def create
+        @recipe = Recipe.new(recipe_params)
 
-    if @recipe.save
-      render json: @recipe, status: :created, location: @recipe
-    else
-      render json: @recipe.errors, status: :unprocessable_entity
+        if @recipe.save
+          render json: @recipe, status: :created, location: @recipe
+        else
+          render json: @recipe.errors, status: :unprocessable_entity
+        end
+      end
+
+      # PATCH/PUT /recipes/1
+      def update
+        if @recipe.update(recipe_params)
+          render json: @recipe
+        else
+          render json: @recipe.errors, status: :unprocessable_entity
+        end
+      end
+
+      # DELETE /recipes/1
+      def destroy
+        @recipe.destroy
+      end
+
+      private
+        def set_recipe
+          @recipe = Recipe.find(params[:id])
+        end
+
+        def recipe_params
+          params.require(:recipe).permit(:description, :price, :time, :serving, :publication)
+        end
     end
   end
-
-  # PATCH/PUT /recipes/1
-  def update
-    if @recipe.update(recipe_params)
-      render json: @recipe
-    else
-      render json: @recipe.errors, status: :unprocessable_entity
-    end
-  end
-
-  # DELETE /recipes/1
-  def destroy
-    @recipe.destroy
-  end
-
-  private
-    def set_recipe
-      @recipe = Recipe.find(params[:id])
-    end
-
-    def recipe_params
-      params.require(:recipe).permit(:description, :price, :time, :serving, :publication)
-    end
 end
