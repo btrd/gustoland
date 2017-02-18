@@ -17,7 +17,6 @@ module Api
       end
 
       def update
-        byebug
         if current_user.update(user_params)
           render status: 200
         else
