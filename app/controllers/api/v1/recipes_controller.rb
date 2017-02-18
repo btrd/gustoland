@@ -12,8 +12,6 @@ module Api
         render json: @recipes
       end
 
-      api :GET, '/recipes/:id'
-      param :id, :number
       # GET /recipes/1
       def show
         render json: @recipe
