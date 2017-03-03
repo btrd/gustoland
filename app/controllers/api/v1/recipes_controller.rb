@@ -5,18 +5,18 @@ module Api
 
       def index
         @recipes = Recipe.all
-        render json: @recipes.as_json(include: { tag: {only: :name} })
+        render json: @recipes.as_json(include: { tags: {only: :name} })
       end
 
       def show
-        render json: @recipe.as_json(include: { tag: {only: :name} })
+        render json: @recipe.as_json(include: { tags: {only: :name} })
       end
 
       def create
         @recipe = Recipe.new(recipe_params)
 
         tags_params.each do |tag|
-          @recipe.tag << Tag.find_or_create_by(name: tag)
+          @recipe.tags << Tag.find_or_create_by(name: tag)
         end
 
         if @recipe.save
