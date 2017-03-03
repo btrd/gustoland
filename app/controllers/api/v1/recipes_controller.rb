@@ -5,11 +5,11 @@ module Api
 
       def index
         @recipes = Recipe.all
-        render json: @recipes.as_json(include: { tags: {only: :name} })
+        render json: @recipes.as_json(include: [:tags, :ingredients])
       end
 
       def show
-        render json: @recipe.as_json(include: { tags: {only: :name} })
+        render json: @recipe.as_json(include: [:tags, :ingredients])
       end
 
       def create
@@ -19,8 +19,12 @@ module Api
           @recipe.tags << Tag.find_or_create_by(name: tag)
         end
 
+        ingredients_params.each do |ingr|
+          @recipe.ingredients.new(label: ingr[:label], quantity: ingr[:quantity], unit: ingr[:unit])
+        end
+
         if @recipe.save
-          render json: @recipe, status: :created
+          render json: @recipe.as_json(include: [:tags, :ingredients]), status: :created
         else
           render json: @recipe.errors, status: :unprocessable_entity
         end
@@ -49,6 +53,10 @@ module Api
 
       def tags_params
         params.permit(:tags)
+      end
+
+      def ingredients_params
+        params.permit(ingredients: [:label, :quantity, :unit])[:ingredients]
       end
     end
   end
