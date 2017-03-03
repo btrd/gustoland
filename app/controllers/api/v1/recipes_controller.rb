@@ -41,7 +41,7 @@ module Api
       end
 
       def recipe_params
-        params.permit(:description, :price, :time, :serving, :publication)
+        params.permit(:description, :price, :time, :serving, :publication, :likes, steps: [])
       end
     end
   end
