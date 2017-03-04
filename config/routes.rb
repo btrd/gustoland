@@ -5,7 +5,10 @@ Rails.application.routes.draw do
       resources :users, only: [:show, :create]
       put 'users', to: 'users#update'
 
-      resources :recipes
+      resources :recipes do
+        resources :comments, only: :create
+      end
+      resources :comments, except: :create
     end
   end
 end
