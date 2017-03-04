@@ -25,7 +25,6 @@ module Api
       end
 
       private
-
       def user_params
         params.permit(:nickname, :email, :name, :password)
       end

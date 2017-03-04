@@ -1,6 +1,7 @@
 module Api
   module V1
     class RecipesController < ApplicationController
+      before_action :authenticate_user, except: [:index, :show]
       before_action :set_recipe, only: [:show, :update, :destroy]
 
       def index
@@ -13,7 +14,7 @@ module Api
       end
 
       def create
-        @recipe = Recipe.new(recipe_params)
+        @recipe = current_user.recipes.new(recipe_params)
 
         tags_params.each do |tag|
           @recipe.tags << Tag.find_or_create_by(name: tag)
