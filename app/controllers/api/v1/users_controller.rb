@@ -3,6 +3,10 @@ module Api
     class UsersController < ApplicationController
       before_action :authenticate_user, except: [:show, :create]
 
+      def index
+        render json: current_user.as_json(include: [:recipes, :follow, :follow_by, :like_recipes, :book_recipes])
+      end
+
       def show
         user = User.find(params[:id])
         render json: user.as_json(include: [:recipes, :follow, :follow_by, :like_recipes, :book_recipes])

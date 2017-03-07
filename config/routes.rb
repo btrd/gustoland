@@ -3,7 +3,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       post 'user_token', to: 'user_token#create'
 
-      resources :users, only: [:show, :create] do
+      resources :users, except: [:update] do
         post   'follow', to: 'users#follow'
         delete 'follow', to: 'users#unfollow'
       end
