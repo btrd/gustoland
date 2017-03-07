@@ -45,7 +45,6 @@ module Api
 
       def like
         recipe = Recipe.find(params[:recipe_id])
-        byebug
         recipe.like_users << current_user unless recipe.like_users.include?(current_user)
       end
 
