@@ -1,10 +1,11 @@
 module Api
   module V1
     class UsersController < ApplicationController
-      before_action :authenticate_user, except: [:create]
+      before_action :authenticate_user, only: [:update]
 
       def show
-        render json: current_user
+        user = User.find(params[:id])
+        render json: user.as_json(include: [:recipes, :follow, :follow_by])
       end
 
       def create
