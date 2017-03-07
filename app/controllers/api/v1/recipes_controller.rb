@@ -53,6 +53,16 @@ module Api
         recipe.book_users << current_user unless recipe.book_users.include?(current_user)
       end
 
+      def unlike
+        recipe = Recipe.find(params[:recipe_id])
+        recipe.like_users.delete(current_user) if recipe.like_users.include?(current_user)
+      end
+
+      def unbook
+        recipe = Recipe.find(params[:recipe_id])
+        recipe.book_users.delete(current_user) if recipe.book_users.include?(current_user)
+      end
+
       private
       def set_recipe
         @recipe = Recipe.find(params[:id])

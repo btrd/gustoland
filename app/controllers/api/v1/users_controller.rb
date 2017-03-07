@@ -30,6 +30,11 @@ module Api
         current_user.follow << user unless current_user.follow.include?(user)
       end
 
+      def unfollow
+        user = User.find(params[:user_id])
+        current_user.follow.delete(user) if current_user.follow.include?(user)
+      end
+
       private
       def user_params
         params.permit(:nickname, :email, :name, :password)
