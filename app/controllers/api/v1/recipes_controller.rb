@@ -6,11 +6,11 @@ module Api
 
       def index
         @recipes = Recipe.all
-        render json: @recipes.as_json(include: [:tags, :ingredients, :comments])
+        render json: @recipes.as_json(include: [:tags, :ingredients, :comments, :like_users], methods: :likes)
       end
 
       def show
-        render json: @recipe.as_json(include: [:tags, :ingredients, :comments])
+        render json: @recipe.as_json(include: [:tags, :ingredients, :comments, :like_users], methods: :likes)
       end
 
       def create
