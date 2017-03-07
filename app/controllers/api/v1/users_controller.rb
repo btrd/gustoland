@@ -1,7 +1,7 @@
 module Api
   module V1
     class UsersController < ApplicationController
-      before_action :authenticate_user, only: [:update]
+      before_action :authenticate_user, except: [:show, :create]
 
       def show
         user = User.find(params[:id])
@@ -23,6 +23,11 @@ module Api
         else
           render json: current_user.errors.messages
         end
+      end
+
+      def follow
+        user = User.find(params[:user_id])
+        current_user.follow << user unless current_user.follow.include?(user)
       end
 
       private
