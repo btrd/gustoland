@@ -5,7 +5,7 @@ module Api
 
       def show
         user = User.find(params[:id])
-        render json: user.as_json(include: [:recipes, :follow, :follow_by])
+        render json: user.as_json(include: [:recipes, :follow, :follow_by, :like_recipes])
       end
 
       def create
