@@ -23,7 +23,7 @@ module Api
       def create
         @recipe = current_user.recipes.new(recipe_params)
 
-        tags_params.each do |tag|
+        tags_params[:tags].each do |tag|
           @recipe.tags << Tag.find_or_create_by(name: tag)
         end
 
@@ -80,7 +80,7 @@ module Api
       end
 
       def tags_params
-        params.permit(:tags)
+        params.permit(tags: [])
       end
 
       def ingredients_params
