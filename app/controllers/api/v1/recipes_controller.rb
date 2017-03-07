@@ -43,6 +43,12 @@ module Api
         @recipe.destroy
       end
 
+      def like
+        recipe = Recipe.find(params[:recipe_id])
+        byebug
+        recipe.like_users << current_user unless recipe.like_users.include?(current_user)
+      end
+
       private
       def set_recipe
         @recipe = Recipe.find(params[:id])
