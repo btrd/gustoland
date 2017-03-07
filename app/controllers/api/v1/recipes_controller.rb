@@ -5,7 +5,14 @@ module Api
       before_action :set_recipe, only: [:show, :update, :destroy]
 
       def index
-        @recipes = Recipe.all
+        if current_user
+          followers = current_user.follow
+          @recipes = []
+          followers.each { |f| @recipes.concat(f.recipes) }
+          @recipes.sort_by { |r| r.created_at }
+        else
+          @recipes = Recipe.all
+        end
         render json: @recipes.as_json(include: [:tags, :ingredients, :comments, :like_users, :book_users], methods: [:likes, :books])
       end
 
