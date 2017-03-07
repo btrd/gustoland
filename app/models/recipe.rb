@@ -7,7 +7,14 @@ class Recipe < ApplicationRecord
   has_many :like_recipes
   has_many :like_users, through: :like_recipes, source: 'user'
 
+  has_many :book_recipes
+  has_many :book_users, through: :book_recipes, source: 'user'
+
   def likes
     like_users.count
+  end
+
+  def books
+    book_users.count
   end
 end

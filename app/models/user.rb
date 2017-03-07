@@ -12,6 +12,9 @@ class User < ApplicationRecord
   has_many :like_recipes
   has_many :likes, through: :like_recipes, source: 'recipe'
 
+  has_many :book_recipes
+  has_many :books, through: :book_recipes, source: 'recipe'
+
   validates :nickname, :email, :name, presence: true
   validates :email, :nickname, uniqueness: true
 end

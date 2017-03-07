@@ -10,10 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170307211202) do
+ActiveRecord::Schema.define(version: 20170307211809) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "book_recipes", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "recipe_id"
+    t.index ["recipe_id"], name: "index_book_recipes_on_recipe_id", using: :btree
+    t.index ["user_id"], name: "index_book_recipes_on_user_id", using: :btree
+  end
 
   create_table "comments", force: :cascade do |t|
     t.string  "content"
@@ -80,6 +87,8 @@ ActiveRecord::Schema.define(version: 20170307211202) do
     t.datetime "updated_at",      null: false
   end
 
+  add_foreign_key "book_recipes", "recipes"
+  add_foreign_key "book_recipes", "users"
   add_foreign_key "comments", "recipes"
   add_foreign_key "comments", "users"
   add_foreign_key "follower_subscriptions", "users", column: "followed_id"
