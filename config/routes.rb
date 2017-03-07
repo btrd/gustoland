@@ -6,7 +6,8 @@ Rails.application.routes.draw do
       put 'users', to: 'users#update'
 
       resources :recipes do
-        post 'likes', to: 'recipes#like'
+        post 'like', to: 'recipes#like'
+        post 'book', to: 'recipes#book'
         resources :comments, only: :create
       end
       resources :comments, except: :create

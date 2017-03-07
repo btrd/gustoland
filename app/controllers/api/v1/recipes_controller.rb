@@ -48,6 +48,11 @@ module Api
         recipe.like_users << current_user unless recipe.like_users.include?(current_user)
       end
 
+      def book
+        recipe = Recipe.find(params[:recipe_id])
+        recipe.book_users << current_user unless recipe.book_users.include?(current_user)
+      end
+
       private
       def set_recipe
         @recipe = Recipe.find(params[:id])
