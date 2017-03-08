@@ -17,7 +17,7 @@ module Api
         if user.save
           render json: user
         else
-          render json: user.errors.messages
+          render json: user.errors.messages, status: :unprocessable_entity
         end
       end
 
@@ -25,7 +25,7 @@ module Api
         if current_user.update(user_params)
           render status: 200
         else
-          render json: current_user.errors.messages
+          render json: current_user.errors.messages, status: :unprocessable_entity
         end
       end
 
