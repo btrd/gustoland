@@ -17,4 +17,17 @@ class Recipe < ApplicationRecord
   def books
     book_users.count
   end
+
+  def as_json(options = {})
+    json = super(options)
+    if options[:current_user].present?
+      user = User.find(options[:current_user])
+      json['like'] = user.likes.include?(self)
+      json['book'] = user.books.include?(self)
+    else
+      json['like'] = false
+      json['book'] = false
+    end
+    json
+  end
 end

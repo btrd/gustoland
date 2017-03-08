@@ -17,4 +17,15 @@ class User < ApplicationRecord
 
   validates :nickname, :email, :name, presence: true
   validates :email, :nickname, uniqueness: true
+
+  def as_json(options = {})
+    json = super(options)
+    if options[:current_user].present?
+      user = User.find(options[:current_user])
+      json['follow'] = user.follow.include?(self)
+    else
+      json['follow'] = false
+    end
+    json
+  end
 end

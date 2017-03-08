@@ -4,12 +4,14 @@ module Api
       before_action :authenticate_user, except: [:show, :create]
 
       def index
-        render json: current_user.as_json(include: [:recipes, :follow, :follow_by, :like_recipes, :book_recipes])
+        current_user_id = current_user ? current_user.id : nil
+        render json: current_user.as_json(include: [:recipes, :follow, :follow_by, :like_recipes, :book_recipes], current_user: current_user_id)
       end
 
       def show
         user = User.find(params[:id])
-        render json: user.as_json(include: [:recipes, :follow, :follow_by, :like_recipes, :book_recipes])
+        current_user_id = current_user ? current_user.id : nil
+        render json: user.as_json(include: [:recipes, :follow, :follow_by, :like_recipes, :book_recipes], current_user: current_user_id)
       end
 
       def create
