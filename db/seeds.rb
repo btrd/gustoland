@@ -130,3 +130,35 @@ r6.tags << Tag.find_or_create_by(name: 'salade')
 r6.tags << Tag.find_or_create_by(name: 'healthy')
 r6.ingredients << Ingredient.create(label: 'pommes de terre', quantity: '200', unit: 'gr')
 r6.ingredients << Ingredient.create(label: 'bouillon de boeuf', quantity: '20', unit: 'gr')
+
+u2.likes << r1
+u2.likes << r2
+u2.likes << r3
+
+u3.books << r1
+u3.books << r2
+u3.books << r5
+
+u4.books << r1
+u4.books << r2
+u4.books << r3
+u4.books << r4
+u4.books << r5
+u4.likes << r1
+u4.likes << r2
+u4.likes << r3
+u4.likes << r4
+u4.likes << r5
+
+c1 = Comment.create(content: 'Super j\'en ai mangé toutes la semaine !')
+c2 = Comment.create(content: 'Simple et efficace, parfait !')
+c3 = Comment.create(content: 'Comme dans ma jeunesse')
+c4 = Comment.create(content: 'Peut mieux faire :/')
+r1.comments << c1
+r1.comments << c2
+u2.comments << c1
+u3.comments << c2
+r3.comments << c3
+u1.comments << c3
+u1.comments << c4
+r1.comments << c4
