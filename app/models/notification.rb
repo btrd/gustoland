@@ -1,6 +1,11 @@
 class Notification < ApplicationRecord
   belongs_to :user
 
+  def seen!
+    self.seen = true
+    self.save
+  end
+
   def self.follow(notif_user, action_user)
     notif(notif_user, "#{action_user.name} vous suis", action_user: action_user)
   end

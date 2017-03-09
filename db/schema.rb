@@ -55,11 +55,13 @@ ActiveRecord::Schema.define(version: 20170309154416) do
   end
 
   create_table "notifications", force: :cascade do |t|
-    t.string  "content"
-    t.boolean "seen",          default: false
-    t.integer "ref_user_id"
-    t.integer "ref_recipe_id"
-    t.integer "user_id"
+    t.string   "content"
+    t.boolean  "seen",          default: false
+    t.integer  "ref_user_id"
+    t.integer  "ref_recipe_id"
+    t.integer  "user_id"
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
     t.index ["ref_recipe_id"], name: "index_notifications_on_ref_recipe_id", using: :btree
     t.index ["ref_user_id"], name: "index_notifications_on_ref_user_id", using: :btree
     t.index ["user_id"], name: "index_notifications_on_user_id", using: :btree

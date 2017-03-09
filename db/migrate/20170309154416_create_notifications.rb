@@ -6,6 +6,8 @@ class CreateNotifications < ActiveRecord::Migration[5.0]
       t.references :ref_user, foreign_key: { to_table: :users }
       t.references :ref_recipe, foreign_key: { to_table: :recipes }
       t.belongs_to :user, foreign_key: true
+
+      t.timestamps
     end
   end
 end
