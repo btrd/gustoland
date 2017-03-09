@@ -6,6 +6,15 @@ class Notification < ApplicationRecord
     self.save
   end
 
+  def image
+    if self.ref_recipe_id
+      image = Recipe.find(self.ref_recipe_id).image
+    else
+      image = User.find(self.ref_user_id).image
+    end
+    return image
+  end
+
   def self.follow(notif_user, action_user)
     notif(notif_user, "#{action_user.name} vous suis", action_user: action_user)
   end

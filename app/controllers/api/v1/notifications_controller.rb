@@ -5,7 +5,8 @@ module Api
 
       def index
         notifications = current_user.notifications
-        render json: notifications.sort_by(&:created_at).reverse
+        notifications = notifications.sort_by(&:created_at).reverse
+        render json: notifications.as_json(methods: :image)
         notifications.each { |n| n.seen! }
       end
     end
