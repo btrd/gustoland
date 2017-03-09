@@ -33,7 +33,6 @@ module Api
 
       def follow
         user = User.find(params[:user_id])
-        byebug
         current_user.follows << user unless current_user.follows.include?(user) || current_user == user
       end
 
