@@ -27,7 +27,7 @@ class Notification < ApplicationRecord
     notif(recipe.user, "#{action_user.name} a enregistré votre recette #{recipe.description}", recipe: recipe)
   end
 
-  def self.more(action_user, recipe)
+  def self.ask_more(action_user, recipe)
     notif(recipe.user, "#{action_user.name} demande plus d'infos sur votre recette #{recipe.description}", recipe: recipe)
   end
 

@@ -10,10 +10,11 @@ Rails.application.routes.draw do
       put 'users', to: 'users#update'
 
       resources :recipes do
-        post   'like', to: 'recipes#like'
-        delete 'like', to: 'recipes#unlike'
-        post   'book', to: 'recipes#book'
-        delete 'book', to: 'recipes#unbook'
+        post   'like',     to: 'recipes#like'
+        delete 'like',     to: 'recipes#unlike'
+        post   'book',     to: 'recipes#book'
+        delete 'book',     to: 'recipes#unbook'
+        post   'ask_more', to: 'recipes#ask_more'
         resources :comments, only: :create
       end
       get 'recipes_search', to: 'search#index'

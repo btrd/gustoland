@@ -96,6 +96,11 @@ module Api
         recipe.book_users.delete(current_user) if recipe.book_users.include?(current_user)
       end
 
+      def ask_more
+        recipe = Recipe.find(params[:recipe_id])
+        Notification.ask_more(current_user, recipe)
+      end
+
       private
       def set_recipe
         @recipe = Recipe.find(params[:id])
