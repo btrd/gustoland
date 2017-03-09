@@ -4,9 +4,15 @@ module Api
       before_action :authenticate_user
 
       def index
-        notifications = current_user.notifications
-        notifications = notifications.sort_by(&:created_at).reverse
+        notif = current_user.notifications
+        notif = notif.sort_by(&:created_at).reverse
+
+        notifications = []
+        notifications.concat(notif.select { |n| !n.seen })
+        notifications.concat(notif.select(&:seen).first(5))
+
         render json: notifications.as_json(methods: :image)
+
         notifications.each { |n| n.seen! }
       end
     end
