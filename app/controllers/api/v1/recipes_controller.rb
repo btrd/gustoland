@@ -79,7 +79,7 @@ module Api
       end
 
       def recipe_params
-        params.permit(:description, :price, :time, :serving, :publication, :likes, steps: [])
+        params.permit(:description, :price, :time, :serving, :publication, :likes, :image, steps: [])
       end
 
       def tags_params
