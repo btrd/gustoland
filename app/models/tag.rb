@@ -8,6 +8,7 @@ class Tag < ApplicationRecord
   end
 
   def image
-    recipes.sort_by { |r| r.likes + r.books }.first.image
+    tag = recipes.sort_by { |r| r.likes + r.books }.first
+    tag.image if tag.present?
   end
 end
