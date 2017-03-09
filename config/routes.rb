@@ -16,6 +16,8 @@ Rails.application.routes.draw do
         delete 'book', to: 'recipes#unbook'
         resources :comments, only: :create
       end
+      get 'recipes_search', to: 'search#index'
+
       resources :comments, except: :create
       resources :tags, only: :index
     end
