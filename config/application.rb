@@ -33,5 +33,10 @@ module Gustoland
         resource '*', headers: :any, methods: :any
       end
     end
+
+    Raven.configure do |config|
+      config.dsn = 'https://891641d9aa464eab895326491aade395:6ec386e090b14b6eb2fc6449ef3d2624@sentry.io/146715'
+      config.environments = ['production']
+    end
   end
 end
