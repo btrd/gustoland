@@ -6,7 +6,7 @@ class User < ApplicationRecord
 
   has_many :follower_subscriptions_follower, class_name: 'FollowerSubscription', foreign_key: 'follower_id'
   has_many :follower_subscriptions_followed, class_name: 'FollowerSubscription', foreign_key: 'followed_id'
-  has_many :follow,    through: :follower_subscriptions_follower, source: :followed
+  has_many :follows,    through: :follower_subscriptions_follower, source: :followed
   has_many :follow_by, through: :follower_subscriptions_followed, source: :follower
 
   has_many :like_recipes
@@ -22,7 +22,7 @@ class User < ApplicationRecord
     json = super(options)
     if options[:current_user].present?
       user = User.find(options[:current_user])
-      json['follow'] = user.follow.include?(self)
+      json['follow'] = user.follows.include?(self)
     else
       json['follow'] = false
     end

@@ -5,13 +5,13 @@ module Api
 
       def index
         current_user_id = current_user ? current_user.id : nil
-        render json: current_user.as_json(include: [:recipes, :follow, :follow_by, :like_recipes, :book_recipes], current_user: current_user_id)
+        render json: current_user.as_json(include: [:recipes, :follows, :follow_by, :like_recipes, :book_recipes], current_user: current_user_id)
       end
 
       def show
         user = User.find(params[:id])
         current_user_id = current_user ? current_user.id : nil
-        render json: user.as_json(include: [:recipes, :follow, :follow_by, :like_recipes, :book_recipes], current_user: current_user_id)
+        render json: user.as_json(include: [:recipes, :follows, :follow_by, :like_recipes, :book_recipes], current_user: current_user_id)
       end
 
       def create
@@ -34,12 +34,12 @@ module Api
       def follow
         user = User.find(params[:user_id])
         byebug
-        current_user.follow << user unless current_user.follow.include?(user) || current_user == user
+        current_user.follows << user unless current_user.follows.include?(user) || current_user == user
       end
 
       def unfollow
         user = User.find(params[:user_id])
-        current_user.follow.delete(user) if current_user.follow.include?(user)
+        current_user.follows.delete(user) if current_user.follows.include?(user)
       end
 
       private

@@ -3,12 +3,12 @@ u2 = User.create(nickname: 'antoine', email: 'antoine@gmail.fr', name: 'Antoine 
 u3 = User.create(nickname: 'honoré', email: 'monmail@mail.fr', name: 'Honoré nash', password: 'password')
 u4 = User.create(nickname: 'julien', email: 'julien@hotmail.fr', name: 'Julien', password: 'password')
 
-u1.follow << u2
-u1.follow << u3
-u4.follow << u1
-u3.follow << u1
-u3.follow << u2
-u3.follow << u4
+u1.follows << u2
+u1.follows << u3
+u4.follows << u1
+u3.follows << u1
+u3.follows << u2
+u3.follows << u4
 
 r1 = u1.recipes.create(
                          description: 'Mes Fajitas maison',
