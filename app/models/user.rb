@@ -3,6 +3,7 @@ class User < ApplicationRecord
 
   has_many :recipes
   has_many :comments
+  has_many :notifications
 
   has_many :follower_subscriptions_follower, class_name: 'FollowerSubscription', foreign_key: 'follower_id'
   has_many :follower_subscriptions_followed, class_name: 'FollowerSubscription', foreign_key: 'followed_id'
