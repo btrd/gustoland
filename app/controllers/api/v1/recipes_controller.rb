@@ -10,7 +10,7 @@ module Api
           recipes = user.recipes
           current_user_id = nil
         elsif current_user
-          followers = current_user.follow
+          followers = current_user.follows
           recipes = []
           followers.each { |f| recipes.concat(f.recipes) }
           recipes.sort_by { |r| r.created_at }
