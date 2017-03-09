@@ -20,6 +20,8 @@ Rails.application.routes.draw do
 
       resources :comments, except: :create
       resources :tags, only: :index
+
+      get 'notifications', to: 'notifications#index'
     end
   end
 end
