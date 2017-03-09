@@ -10,20 +10,20 @@ class Notification < ApplicationRecord
     notif(notif_user, "#{action_user.name} vous suis", action_user: action_user)
   end
 
-  def self.like(notif_user, action_user, recipe)
-    notif(notif_user, "#{action_user.name} a aimé votre recette #{recipe.description}", recipe: recipe)
+  def self.like(action_user, recipe)
+    notif(recipe.user, "#{action_user.name} a aimé votre recette #{recipe.description}", recipe: recipe)
   end
 
-  def self.book(notif_user, action_user, recipe)
-    notif(notif_user, "#{action_user.name} a enregistré votre recette #{recipe.description}", recipe: recipe)
+  def self.book(action_user, recipe)
+    notif(recipe.user, "#{action_user.name} a enregistré votre recette #{recipe.description}", recipe: recipe)
   end
 
-  def self.more(notif_user, action_user, recipe)
-    notif(notif_user, "#{action_user.name} demande plus d'infos sur votre recette #{recipe.description}", recipe: recipe)
+  def self.more(action_user, recipe)
+    notif(recipe.user, "#{action_user.name} demande plus d'infos sur votre recette #{recipe.description}", recipe: recipe)
   end
 
-  def self.comment(notif_user, action_user, recipe)
-    notif(notif_user, "#{action_user.name} a commenté votre recette #{recipe.description}", recipe: recipe)
+  def self.comment(action_user, recipe)
+    notif(recipe.user, "#{action_user.name} a commenté votre recette #{recipe.description}", recipe: recipe)
   end
 
   def self.notif(notif_user, content, action_user: nil, recipe: nil)

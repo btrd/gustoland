@@ -72,12 +72,18 @@ module Api
 
       def like
         recipe = Recipe.find(params[:recipe_id])
-        recipe.like_users << current_user unless recipe.like_users.include?(current_user)
+        unless recipe.like_users.include?(current_user)
+          recipe.like_users << current_user
+          Notification.like(current_user, recipe)
+        end
       end
 
       def book
         recipe = Recipe.find(params[:recipe_id])
-        recipe.book_users << current_user unless recipe.book_users.include?(current_user)
+        unless recipe.book_users.include?(current_user)
+          recipe.book_users << current_user
+          Notification.book(current_user, recipe)
+        end
       end
 
       def unlike

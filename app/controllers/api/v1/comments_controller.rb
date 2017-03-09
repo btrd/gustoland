@@ -5,6 +5,8 @@ module Api
 
       def create
         comment = current_user.comments.new(comment_params)
+        recipe = Recipe.find(params[:recipe_id])
+        Notification.comment(current_user, recipe)
         if comment.save
           render json: comment
         else
