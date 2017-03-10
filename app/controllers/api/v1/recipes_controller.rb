@@ -6,7 +6,8 @@ module Api
 
       def index
         if params[:book] && current_user
-          recipes = current_user.books
+          recipes = []
+          recipes.concat(current_user.books)
           recipes.concat(current_user.recipes)
           current_user_id = current_user.id
         elsif params[:user_id]
