@@ -5,10 +5,14 @@ module Api
       before_action :set_recipe, only: [:show, :update, :destroy]
 
       def index
-        if params[:user_id]
+        if params[:book] && current_user
+          recipes = current_user.books
+          recipes.concat(current_user.recipes)
+          current_user_id = current_user.id
+        elsif params[:user_id]
           user = User.find(params[:user_id])
           recipes = user.recipes
-          current_user_id = nil
+          current_user_id = current_user ? current_user.id : nil
         elsif current_user
           followers = current_user.follows
           recipes = []
@@ -81,7 +85,7 @@ module Api
 
       def book
         recipe = Recipe.find(params[:recipe_id])
-        unless recipe.book_users.include?(current_user)
+        unless recipe.book_users.include?(current_user) || recipe.user == current_user
           recipe.book_users << current_user
           Notification.book(current_user, recipe)
         end
