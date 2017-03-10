@@ -13,12 +13,13 @@ module Api
           followers = current_user.follows
           recipes = []
           followers.each { |f| recipes.concat(f.recipes) }
-          recipes.sort_by { |r| r.created_at }
+          recipes.concat(current_user.recipes)
           current_user_id = current_user.id
         else
           recipes = Recipe.all
           current_user_id = nil
         end
+        recipes = recipes.sort_by { |r| r.created_at }.reverse
         render json: recipes.as_json(
                                       include: [
                                                   :tags,
