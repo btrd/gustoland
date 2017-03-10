@@ -35,7 +35,7 @@ module Api
         user = User.find(params[:user_id])
         unless current_user.follows.include?(user) || current_user == user
           current_user.follows << user
-          Notification.follow(current_user, user)
+          Notification.follow(user, current_user)
         end
       end
 
