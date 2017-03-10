@@ -13,15 +13,15 @@ module Api
 
         current_user_id = current_user ? current_user.id : nil
 
-        res_recipes.uniq!
+        res_recipes = res_recipes.uniq
 
         if params[:sort] || params[:sort] == 'date'
-          res_recipes.sort_by! { |r| r.created_at }.reverse!
+          res_recipes = res_recipes.sort_by { |r| r.created_at }.reverse
         else
-          res_recipes.sort_by! { |r| r.likes + r.books }
+          res_recipes = res_recipes.sort_by { |r| r.likes + r.books }.reverse
         end
 
-        render json: res_recipes.uniq.as_json(
+        render json: res_recipes.as_json(
                                       include: [
                                                   :tags,
                                                   :ingredients,
