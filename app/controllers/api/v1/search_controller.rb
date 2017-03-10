@@ -22,19 +22,19 @@ module Api
         end
 
         render json: res_recipes.as_json(
-                                      include: [
-                                                  :tags,
-                                                  :ingredients,
-                                                  :like_users,
-                                                  :book_users,
-                                                  :user,
-                                                  comments: {
-                                                    include: :user
-                                                  }
-                                                ],
-                                      methods: [:likes, :books],
-                                      current_user: current_user_id
-                                    )
+                                          include: [
+                                                      :tags,
+                                                      :ingredients,
+                                                      :like_users,
+                                                      :book_users,
+                                                      :user,
+                                                      comments: {
+                                                        include: :user
+                                                      }
+                                                    ],
+                                          methods: [:likes, :books],
+                                          current_user: current_user_id
+                                        )
       end
     end
   end
