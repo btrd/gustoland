@@ -85,7 +85,7 @@ module Api
 
       def book
         recipe = Recipe.find(params[:recipe_id])
-        unless recipe.book_users.include?(current_user) || recipe.user == current_user
+        unless recipe.book_users.include?(current_user)
           recipe.book_users << current_user
           Notification.book(current_user, recipe)
         end
