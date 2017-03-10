@@ -18,7 +18,7 @@ module Api
         if params[:sort] || params[:sort] == 'date'
           res_recipes = res_recipes.sort_by { |r| r.created_at }.reverse
         else
-          res_recipes = res_recipes.sort_by { |r| r.likes + r.books }.reverse
+          res_recipes = res_recipes.sort_by { |r| r.popularity }.reverse
         end
 
         render json: res_recipes.as_json(

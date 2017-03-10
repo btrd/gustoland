@@ -18,6 +18,14 @@ class Recipe < ApplicationRecord
     book_users.count
   end
 
+  def count_comment
+    comments.count
+  end
+
+  def popularity
+    likes + books + count_comment
+  end
+
   def as_json(options = {})
     json = super(options)
     if options[:current_user].present?
