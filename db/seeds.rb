@@ -1,3 +1,7 @@
+def image_data(path)
+  Base64.encode64(open(Rails.root.join('db', 'seed_images', "#{path}.jpg")) { |io| io.read })
+end
+
 u1 = User.create(nickname: 'jean', email: 'jean@bertrand.fr', name: 'Jean Le Cuisto', password: 'password')
 u2 = User.create(nickname: 'antoine', email: 'antoine@gmail.fr', name: 'Antoine du Nord', password: 'password')
 u3 = User.create(nickname: 'honoré', email: 'monmail@mail.fr', name: 'Honoré nash', password: 'password')
@@ -20,8 +24,9 @@ r1 = u1.recipes.create(
                            'Acheter des Fajitas',
                            'Mettre la sauce sur les Fajitas',
                            'Manger'
-                        ]
-                      )
+                         ],
+                         image: image_data('fajitas')
+                       )
 r1.tags << Tag.find_or_create_by(name: 'espagnol')
 r1.tags << Tag.find_or_create_by(name: 'healthy')
 r1.tags << Tag.find_or_create_by(name: 'homemade')
@@ -39,8 +44,9 @@ r2 = u1.recipes.create(
                            'Mettre une couche de pates à lasagne pré-cuite',
                            'Répéter jusqu\'à arriver au bord du plat',
                            'Finir avec du fromage pour gratiner'
-                        ]
-                      )
+                         ],
+                         image: image_data('lasagne')
+                       )
 r2.tags << Tag.find_or_create_by(name: 'italien')
 r2.tags << Tag.find_or_create_by(name: 'pascher')
 r2.ingredients << Ingredient.create(label: 'sauce', quantity: '1', unit: 'pot')
@@ -59,8 +65,9 @@ r3 = u2.recipes.create(
                            'Rajouter les pommes de terres',
                            'Laisser cuire 2h',
                            'Déguster avec un bon verre de Riesling'
-                        ]
-                      )
+                         ],
+                         image: image_data('choucroute')
+                       )
 r3.tags << Tag.find_or_create_by(name: 'alsace')
 r3.tags << Tag.find_or_create_by(name: 'dimanche')
 r3.tags << Tag.find_or_create_by(name: 'fat')
@@ -81,8 +88,9 @@ r4 = u3.recipes.create(
                            'Egouter',
                            'Rajouter du beurre',
                            'Déguster !'
-                        ]
-                      )
+                         ],
+                         image: image_data('pates')
+                       )
 r4.tags << Tag.find_or_create_by(name: 'pascher')
 r4.tags << Tag.find_or_create_by(name: 'pasta')
 r4.ingredients << Ingredient.create(label: 'pates', quantity: '150', unit: 'gr')
@@ -99,8 +107,9 @@ r5 = u4.recipes.create(
                            'Mélanger 1 oeuf avec 2 cuillères à soupe de sucre',
                            'Rajouter de la crème fraiche et mélanger',
                            'Mettre la mixture sur la tarte puis remettre au four 15/20min à 220°'
-                        ]
-                      )
+                         ],
+                         image: image_data('tarte')
+                       )
 r5.tags << Tag.find_or_create_by(name: 'dessert')
 r5.tags << Tag.find_or_create_by(name: 'dimanche')
 r5.tags << Tag.find_or_create_by(name: 'pommes')
@@ -123,8 +132,9 @@ r6 = u4.recipes.create(
                           'rajouter de l\'eau chaude dans laquelle tu as fait cuire des knacks ou du bouillon de boeuf',
                           'laisser reposer au moins 1 h avant de servir',
                           'ne pas mettre au frigo car ça ne se mange pas trop froid'
-                        ]
-                      )
+                         ],
+                         image: image_data('patate')
+                       )
 r6.tags << Tag.find_or_create_by(name: 'pommes')
 r6.tags << Tag.find_or_create_by(name: 'salade')
 r6.tags << Tag.find_or_create_by(name: 'healthy')
