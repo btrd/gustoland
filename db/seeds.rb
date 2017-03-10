@@ -1,5 +1,5 @@
 def image_data(path)
-  Base64.strict_encode64(open(Rails.root.join('db', 'seed_images', "#{path}.jpg")) { |io| io.read })
+  'data:image/jpeg;base64,' + Base64.strict_encode64(open(Rails.root.join('db', 'seed_images', "#{path}.jpg")) { |io| io.read })
 end
 
 u1 = User.create(nickname: 'jean', email: 'jean@bertrand.fr', name: 'Jean Le Cuisto', password: 'password')
