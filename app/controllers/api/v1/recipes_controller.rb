@@ -43,7 +43,7 @@ module Api
 
       def show
         current_user_id = current_user ? current_user.id : nil
-        render json: @recipe.as_json(include: [:tags, :ingredients, :comments, :like_users, :book_users, :user], methods: [:likes, :books], current_user: current_user_id)
+        render json: @recipe.as_json(include: [:tags, :ingredients, :like_users, :book_users, :user, comments: { include: :user } ], methods: [:likes, :books], current_user: current_user_id)
       end
 
       def create
